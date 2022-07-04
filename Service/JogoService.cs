@@ -100,10 +100,9 @@ namespace Lojinha3API.Service
 
         public bool Update(int id,Jogo Novojogo)
         {
-            int jogoId = Convert.ToInt32(Novojogo.Id);
             try
             {
-                var jogoRetornadoValido = Exists(jogoId);
+                var jogoRetornadoValido = Exists(id);
                 if (jogoRetornadoValido != null)
                 {
                     _lojinhaContext.Entry(jogoRetornadoValido).CurrentValues.SetValues(Novojogo);

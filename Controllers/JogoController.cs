@@ -52,7 +52,8 @@ namespace Lojinha3API.Controllers
         }
 
         // PUT api/<JogoController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("AlteraJogo/{id}")]
         public IActionResult AlteraJogo(int id, [FromBody] Jogo jogo)
         {
             if(_jogoService.Update(id, jogo))
@@ -61,7 +62,8 @@ namespace Lojinha3API.Controllers
         }
 
         // DELETE api/<JogoController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("DeletaJogo/{id}")]
         public IActionResult ApagaJogo(int id)
         {
             if (_jogoService.Delete(id))
