@@ -20,4 +20,9 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lojinha3.Data\Lojinha3.Data.csproj" />
+    <ProjectReference Include="..\Lojinha3.Domain\Lojinha3.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

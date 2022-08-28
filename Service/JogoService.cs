@@ -49,7 +49,7 @@ namespace Lojinha3API.Service
         {
             var produtosretornadosdto = from jogo in _lojinhaContext.Jogos
                                         join desenvolvedora in _lojinhaContext.Desenvolvedoras on jogo.DesenvolvedoraId equals desenvolvedora.Id
-                                        join plataforma in _lojinhaContext.Plataformas on jogo.PlataformaId equals plataforma.Id
+                                    
 
                                         select new JogoDto()
                                         {
@@ -57,8 +57,8 @@ namespace Lojinha3API.Service
                                             Titulo = jogo.Titulo,
                                             AnoLancamento = jogo.AnoLancamento,
                                             IdDesenvolvedora = jogo.DesenvolvedoraId,
-                                            IdPlataforma = jogo.PlataformaId,
-                                            Plataforma = plataforma,
+                                            //IdPlataforma = jogo.PlataformaId,
+                                            //Plataforma = plataforma,
                                             Desenvolvedora = desenvolvedora
                                         };
             return produtosretornadosdto;
@@ -68,7 +68,7 @@ namespace Lojinha3API.Service
         {
             var produtosretornadosdto = from jogo in _lojinhaContext.Jogos
                                         join desenvolvedora in _lojinhaContext.Desenvolvedoras on jogo.DesenvolvedoraId equals desenvolvedora.Id
-                                        join plataforma in _lojinhaContext.Plataformas on jogo.PlataformaId equals plataforma.Id
+                                        //join plataforma in _lojinhaContext.Plataformas on jogo.PlataformaId equals plataforma.Id
                                         where jogo.Id == IdJogo
                                         select new JogoDto()
                                         {
@@ -76,8 +76,8 @@ namespace Lojinha3API.Service
                                             Titulo = jogo.Titulo,
                                             AnoLancamento = jogo.AnoLancamento,
                                             IdDesenvolvedora = jogo.DesenvolvedoraId,
-                                            IdPlataforma = jogo.PlataformaId,
-                                            Plataforma = plataforma,
+                                            //IdPlataforma = jogo.PlataformaId,
+                                            //Plataforma = plataforma,
                                             Desenvolvedora = desenvolvedora
                                         };
             return produtosretornadosdto;

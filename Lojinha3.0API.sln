@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lojinha3API", "Lojinha3API.csproj", "{90E09F73-1F07-49EB-A77C-53B264D3CDEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lojinha3API", "Lojinha3API.csproj", "{90E09F73-1F07-49EB-A77C-53B264D3CDEF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lojinha3.Domain", "..\Lojinha3.Domain\Lojinha3.Domain.csproj", "{10646D1C-9051-421D-A2BC-0DB9D7BC2F1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lojinha3.Data", "..\Lojinha3.Data\Lojinha3.Data.csproj", "{07C76687-D66A-4035-ACAB-684A195FA321}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{90E09F73-1F07-49EB-A77C-53B264D3CDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90E09F73-1F07-49EB-A77C-53B264D3CDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90E09F73-1F07-49EB-A77C-53B264D3CDEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10646D1C-9051-421D-A2BC-0DB9D7BC2F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10646D1C-9051-421D-A2BC-0DB9D7BC2F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10646D1C-9051-421D-A2BC-0DB9D7BC2F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10646D1C-9051-421D-A2BC-0DB9D7BC2F1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C76687-D66A-4035-ACAB-684A195FA321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C76687-D66A-4035-ACAB-684A195FA321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C76687-D66A-4035-ACAB-684A195FA321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C76687-D66A-4035-ACAB-684A195FA321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

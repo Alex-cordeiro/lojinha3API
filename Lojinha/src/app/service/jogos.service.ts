@@ -27,6 +27,13 @@ export class JogoService {
         )
     }
 
+    salvarJogo(jogo: Jogo): Observable<Jogo[]> {
+        return this.httpclient.post<Jogo[]>(`${environment.URL}` + 'jogo', jogo)
+        .pipe(
+            retry(2),
+            catchError(this.handleError)
+        )
+    }
 
     handleError(error: HttpErrorResponse) {
         let errorMessage = '';
