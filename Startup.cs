@@ -1,19 +1,15 @@
+using Business.Implementations;
+using Business.Interfaces;
+using Lojinha3.Data.Repository.Generic;
+using Lojinha3API.AutomapperConfig;
 using Lojinha3API.Context;
-using Lojinha3API.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lojinha3API
 {
@@ -29,13 +25,21 @@ namespace Lojinha3API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //config conexão banco
             var connectionStrings = Configuration["ConnectionStrings:Mysql"];
             services.AddDbContext<LojinhaContext>(options => options.UseMySql(connectionStrings, ServerVersion.AutoDetect(connectionStrings)));
 
+            //injeção de dependencia dos serviços
+
+            //injeção das implementações da camada de negócios 
+            services.AddTransient<IDesenvolvedoraBusiness, DesenvolvedoraBusinessImplementation>();
+
+            //injeção do repositório genérico
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 
-            services.AddTransient<JogoService, JogoService>();
+            services.AddAutoMapper(typeof(LojinhaProfile));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -67,8 +71,7 @@ namespace Lojinha3API
 
             app.UseAuthorization();
 
-           
-
+  
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

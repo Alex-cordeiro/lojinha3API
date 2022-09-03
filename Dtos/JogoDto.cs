@@ -9,7 +9,5 @@ namespace Lojinha3API.Models.Dtos
         public int AnoLancamento { get; set; }
         public int IdDesenvolvedora { get; set; }
         public int IdPlataforma { get; set; }
-        public Plataforma Plataforma { get; set; }
-        public Desenvolvedora Desenvolvedora { get; set; }
     }
 }
