@@ -9,7 +9,7 @@ namespace Lojinha3.Data.Repository.Generic
         T FindByID(long id);
         List<T> FindAll();
         T Update(T item);
-        bool Delete(long id);
+        bool Delete(int id);
         bool Exists(long id);
     }
 }

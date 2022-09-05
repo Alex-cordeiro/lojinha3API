@@ -1,4 +1,5 @@
 export class Desenvolvedora {
-    id!:number;
+    id?:number;
     nome!: string;
+    pais!: string;
 }

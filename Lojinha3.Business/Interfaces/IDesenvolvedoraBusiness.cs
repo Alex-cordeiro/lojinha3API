@@ -9,6 +9,6 @@ namespace Business.Interfaces
         public Desenvolvedora FindByID(long id);
         List<Desenvolvedora> FindAll();
         Desenvolvedora Update(Desenvolvedora desenvolvedora);
-        bool Delete(long id);
+        bool Delete(int id);
     }
 }

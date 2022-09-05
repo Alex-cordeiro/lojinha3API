@@ -10,6 +10,8 @@ import { JogosComponent } from './components/paginas/jogos/jogos.component';
 import { DesenvolvedorasComponent } from './components/paginas/desenvolvedoras/desenvolvedoras.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,14 +21,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     RodapeComponent,
     HomeComponent,
     JogosComponent,
-    DesenvolvedorasComponent
-    
+    DesenvolvedorasComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

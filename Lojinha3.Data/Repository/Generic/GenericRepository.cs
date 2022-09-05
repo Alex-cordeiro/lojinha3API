@@ -31,9 +31,9 @@ namespace Lojinha3.Data.Repository.Generic
             
         }
 
-        public bool Delete(long id)
+        public bool Delete(int id)
         {
-           var result = dataset.SingleOrDefault(p => p.Equals(id));
+           var result = dataset.SingleOrDefault(p => p.Id.Equals(id));
             if(result != null)
             {
                 try

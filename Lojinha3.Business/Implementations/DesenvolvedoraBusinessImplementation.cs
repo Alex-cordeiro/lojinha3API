@@ -19,7 +19,7 @@ namespace Business.Implementations
             return _repository.Create(desenvolvedora);
         }
 
-        public bool Delete(long id)
+        public bool Delete(int id)
         {
              if(_repository.Delete(id))
                 return true;
