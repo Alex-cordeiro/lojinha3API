@@ -9,9 +9,9 @@ namespace Lojinha3API.AutomapperConfig
         public LojinhaProfile()
         {
             CreateMap<Desenvolvedora, DesenvolvedoraDto>()
-                .ForMember(dto => dto.IdDesenvolvedora, d => d.MapFrom(x => x.Id));
+                .ForMember(dto => dto.Id, d => d.MapFrom(x => x.Id));
             CreateMap<Desenvolvedora, DesenvolvedoraDto>()
-                .ForMember(dto => dto.IdDesenvolvedora, d => d.MapFrom(x => x.Id)).ReverseMap();
+                .ForMember(dto => dto.Id, d => d.MapFrom(x => x.Id)).ReverseMap();
         }
     }
 }

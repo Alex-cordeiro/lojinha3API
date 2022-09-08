@@ -1,8 +1,37 @@
 <div class="container-fluid" style="margin-top: 50px;">
-    <div class="card list-car">
-      <h5 class="card-header">Lista de Jogos</h5>
-      <div class="card-body">
-        <table class="table">
+  <div class="row">
+    <h2>Cadastro De Desenvolvedoras</h2>
+    <hr>
+  </div>
+  <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+          <form [formGroup]="desenvolvedoraForm" (ngSubmit)="onSubmit()" class="form">
+            <div class="form-row">
+              <input type="hidden" class="form-control" id="idDesenvolvedora" formControlName="idDesenvolvedora">
+              <div class="form-group mb-2">
+                <label for="staticEmail2" class="sr-only">Nome</label>
+                <input type="text" class="form-control" id="desenvolvedora" placeholder="Desenvolvedora"
+                  formControlName="nome">
+              </div>
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" id="paisDesenvolvedora" placeholder="Pais" formControlName="pais">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <button type="submit" class="btn btn-success mb-2 ml-2">Enviar</button>
+              </div>
+            </div>
+          </form>
+      </div>
+     
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card list-car">
+        <h5 class="card-header">Lista de Jogos</h5>
+        <div class="card-body">
+          <table class="table">
             <thead>
               <tr>
                 <th scope="col">Id</th>
@@ -11,84 +40,45 @@
               </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let desenvolvedora of desenvolvedoras">
+              <tr *ngFor="let desenvolvedora of desenvolvedoras | paginate: {itemsPerPage: contador, currentPage: pag}">
                 <td>{{desenvolvedora.id}}</td>
                 <td>{{desenvolvedora.nome}}</td>
                 <td>{{desenvolvedora.pais}}</td>
                 <td>
-                  <button type="button" class="btn btn-warning btn-sm" (click)="abrirModalEditar(desenvolvedora)">Editar</button>
-                  <button type="button" class="btn btn-danger btn-sm ml-1" (click)="abrirModalApagar(desenvolvedora)">Deletar</button>
+                  <button type="button" class="btn btn-warning btn-sm" (click)="editar(desenvolvedora)">Editar</button>
+                  <button type="button" class="btn btn-danger btn-sm ml-1"
+                    (click)="abrirModalApagar(desenvolvedora)">Deletar</button>
                 </td>
               </tr>
             </tbody>
           </table>
-      </div>
-    </div>
-
-    <button class="btn btn-primary">Cadastrar Nova Desenvolvedora</button>
-
-    <div class="row">
-        <div class="col-12">
-            <form [formGroup]="desenvolvedoraForm"  (ngSubmit)="onSubmit()" class="form-inline">
-                <div class="form-group mb-2">
-                  <label for="staticEmail2" class="sr-only">Nome</label>
-                  <input type="text" class="form-control" id="desenvolvedora" placeholder="Desenvolvedora" formControlName="nome">
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                  <input type="text" class="form-control" id="paisDesenvolvedora" placeholder="Pais" formControlName="pais">
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-                    </div>
-                </div>
-            </form>
+          <div class="text-center">
+            <pagination-controls (pageChange)="pag = $event" previousLabel="Anterior" nextLabel="Próximo" ></pagination-controls>
+          </div>
+          
         </div>
-    </div>
-</div>
-
-
-
-<!-- Modal de apagar -->
-<div class="modal" tabindex="-1" [ngStyle]="{'display': displayApagar}">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Opção</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Deseja Apagar o Registro?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fecharModalApagar()">Fechar</button>
-        <button type="button" class="btn btn-success" (click)="deleteDesenvolvedora()">Apagar</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal de editar -->
-<div class="modal" tabindex="-1" [ngStyle]="{'display': displayEditar}">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Opção</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Deseja Apagar o Registro?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fecharModalEditar()">Fechar</button>
-        <button type="button" class="btn btn-primary" (click)="editaDesenvolvedora()">Editar</button>
+  <!-- Modal de apagar -->
+  <div class="modal" tabindex="-1" [ngStyle]="{'display': displayApagar}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Opção</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Deseja Apagar o Registro?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"
+            (click)="fecharModalApagar()">Fechar</button>
+          <button type="button" class="btn btn-success" (click)="deleteDesenvolvedora(desenvolvedoraEdicao)">Apagar</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-    
-

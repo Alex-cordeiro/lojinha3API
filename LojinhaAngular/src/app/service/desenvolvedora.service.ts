@@ -37,12 +37,11 @@ export class DesenvolvedorasService {
     }
 
     editaDesenvolvedora(desenvolvedora: Desenvolvedora): Observable<HttpResponse<Desenvolvedora[]>> {
-        return this.httpclient.post<Desenvolvedora[]>(`${environment.URL}` + 'desenvolvedora/AlterarDesenvolvedora', desenvolvedora, {observe: 'response'})
+        return this.httpclient.put<Desenvolvedora[]>(`${environment.URL}` + 'desenvolvedora/AlterarDesenvolvedora', desenvolvedora, {observe: 'response'})
         .pipe(
-            retry(2),
             catchError(this.handleError)
         ).pipe(
-            map((retorno: any) => retorno.status)
+            map((retorno: any) => retorno)
         )
     }
 

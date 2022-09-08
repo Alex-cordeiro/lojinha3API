@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MenuComponent } from './components/menu/menu.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HomeComponent,
     JogosComponent,
     DesenvolvedorasComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    FontAwesomeModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

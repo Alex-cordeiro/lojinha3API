@@ -11,13 +11,18 @@ import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms'
 })
 export class DesenvolvedorasComponent implements OnInit {
 
-  desenvolvedoras: Array<Desenvolvedora> | undefined;
+  desenvolvedoras: Array<Desenvolvedora> = [];
   desenvolvedoraEdicao!: Desenvolvedora;
   arrayany?: Array<any> = [];
   desenvolvedoraForm!: FormGroup;
   
   displayApagar = "none";
-  displayEditar = "none";
+  editaRegistro: boolean = true;
+  displayForm: boolean = false;
+
+  //paginação
+  contador = 10;
+  pag = 1;
 
   constructor(private desenvolvedoraService: DesenvolvedorasService, 
               private toastrService: ToastrService, 
@@ -30,6 +35,7 @@ export class DesenvolvedorasComponent implements OnInit {
 
   geraFormulario(desenvolvedora: Desenvolvedora) {
     this.desenvolvedoraForm = this.formBuilder.group({
+      id: new FormControl(desenvolvedora.id),
       nome: new FormControl(desenvolvedora.nome, [Validators.required]),
       pais: new FormControl(desenvolvedora.pais, [Validators.required])
     })
@@ -37,17 +43,24 @@ export class DesenvolvedorasComponent implements OnInit {
 
   onSubmit(){
     if(this.desenvolvedoraForm.valid){
-      const novaDesenvolvedora = {
+      this.desenvolvedoraEdicao = {
         nome: this.desenvolvedoraForm.controls['nome'].value,
-        pais: this.desenvolvedoraForm.controls['pais'].value
+        pais: this.desenvolvedoraForm.controls['pais'].value,
+        id: 0
       }
-
-      this.cadastraDesenvolvedora(novaDesenvolvedora);
-    }else{
-      this.toastrService.error("Revise as informações do formulario!");
+      
+      const idDesenvolvedora = this.desenvolvedoraForm.controls['id'].value;
+      if( idDesenvolvedora != '' && idDesenvolvedora > 0){
+         this.desenvolvedoraEdicao.id = parseInt(idDesenvolvedora);
+        
+        this.editaDesenvolvedora(this.desenvolvedoraEdicao);
+      }else
+        this.cadastraDesenvolvedora(this.desenvolvedoraEdicao);
     }
-    
+    this.desenvolvedoraEdicao = new Desenvolvedora();
   }
+
+  
   retornaDesenvolvedoras(){
     this.desenvolvedoraService.RetornaDesenvolvedoras().subscribe( 
       resp => {
@@ -92,45 +105,35 @@ export class DesenvolvedorasComponent implements OnInit {
   fecharModalApagar() {
     this.displayApagar = "none";
   }
-  
-  abrirModalEditar(desenvolvedora: Desenvolvedora){
-    this.desenvolvedoraEdicao = {id: desenvolvedora.id, nome: desenvolvedora.nome, pais: desenvolvedora.pais};
-    this.displayEditar = "block";
+  mostraFormularioCadastro(){
+    this.displayForm = !this.displayForm;
   }
 
-  fecharModalEditar() {
-    this.displayEditar = "none";
-  }
-  
-
-  deleteDesenvolvedora(){
-      if(this.desenvolvedoraEdicao.id === null)
+  deleteDesenvolvedora(desenvolvedora: Desenvolvedora){
+      if(desenvolvedora.id === null)
           this.toastrService.error("Selecione um registro para apagar");
       else
-          this.desenvolvedoraService.deletaDesenvolvedora(this.desenvolvedoraEdicao).subscribe();
+          this.desenvolvedoraService.deletaDesenvolvedora(desenvolvedora).subscribe();
           this.fecharModalApagar();
           this.retornaDesenvolvedoras();
-    this.desenvolvedoraEdicao = new Desenvolvedora();
   }
 
-  editaDesenvolvedora(){
-    if(this.desenvolvedoraEdicao.id === null)
-      this.toastrService.error("Selecione um registro para editar!");
-    else
+  editar(desenvolvedora: Desenvolvedora){
+    this.geraFormulario(desenvolvedora);
+  }
+  editaDesenvolvedora(desenvolvedora: Desenvolvedora){
       this.desenvolvedoraService.editaDesenvolvedora(this.desenvolvedoraEdicao).subscribe(
         resp => {
-          var retorno = resp;
-          this.fecharModalEditar();
-          this.retornaDesenvolvedoras();
+          this.toastrService.success(resp.statusText);
+          this.retornaDesenvolvedoras();    
         },
         (error: any) => {
           this.toastrService.error(error);
         },
         () => {
-
+          this.desenvolvedoraForm.reset();
         }
       );
-    this.desenvolvedoraEdicao = new Desenvolvedora();
   }
 
 }

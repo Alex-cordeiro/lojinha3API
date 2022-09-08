@@ -24,11 +24,6 @@ namespace Lojinha3.Data.Maps
             builder.Property(x => x.CreatedAt)
                     .ValueGeneratedOnAdd();
 
-
-            builder.HasOne(x => x.Desenvolvedora)
-                   .WithOne(x => x.Jogo)
-                   .HasConstraintName("FK_Desenvolvedora_Jogos")
-                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

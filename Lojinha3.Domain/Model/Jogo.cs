@@ -10,5 +10,6 @@ namespace Lojinha3.Domain.Model
         public int DesenvolvedoraId { get; set; }
         public Desenvolvedora Desenvolvedora { get; set; }
         public List<JogoPlataforma> JogosPlataformas { get; set; }
+        public List<JogoDesenvolvedora> JogoDesenvolvedoras { get; set; }
     }
 }
