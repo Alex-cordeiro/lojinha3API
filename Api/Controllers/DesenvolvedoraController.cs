@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Business.Interfaces;
-using Lojinha3.Domain.Model;
-using Lojinha3API.Dtos;
+using Lojinha3.Domain.Model.Games;
+using Lojinha3.Domain.Model.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lojinha3API.Controllers

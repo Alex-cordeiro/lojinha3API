@@ -13,7 +13,6 @@ export class DesenvolvedorasComponent implements OnInit {
 
   desenvolvedoras: Array<Desenvolvedora> = [];
   desenvolvedoraEdicao!: Desenvolvedora;
-  arrayany?: Array<any> = [];
   desenvolvedoraForm!: FormGroup;
   
   displayApagar = "none";

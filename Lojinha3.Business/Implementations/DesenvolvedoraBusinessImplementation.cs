@@ -1,6 +1,6 @@
 ﻿using Business.Interfaces;
 using Lojinha3.Data.Repository.Generic;
-using Lojinha3.Domain.Model;
+using Lojinha3.Domain.Model.Games;
 using System.Collections.Generic;
 
 namespace Business.Implementations

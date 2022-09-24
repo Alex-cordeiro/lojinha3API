@@ -18,6 +18,64 @@ namespace Lojinha3.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.16");
 
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.CategoriaMenuAcesso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Icone")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_CategoriaMenuAcesso");
+
+                    b.ToTable("CategoriaMenuAcesso");
+                });
+
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoCategoriaMenuUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoriaMenuAcessoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id")
+                        .HasName("PK_PermissaoCategoriaMenuAcesso");
+
+                    b.HasIndex("CategoriaMenuAcessoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("PermissaoCategoriaMenuUsuario");
+                });
+
             modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoMenuUsuario", b =>
                 {
                     b.Property<int>("Id")
@@ -61,6 +119,13 @@ namespace Lojinha3.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
+                    b.Property<string>("RefreshToken")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -77,7 +142,7 @@ namespace Lojinha3.Data.Migrations
                     b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Desenvolvedora", b =>
+            modelBuilder.Entity("Lojinha3.Domain.Model.Games.Desenvolvedora", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,34 +168,7 @@ namespace Lojinha3.Data.Migrations
                     b.ToTable("Desenvolvedora");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Estoque", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("JogoPlataformaId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Preco")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<int>("QteJogoPorPlataforma")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id")
-                        .HasName("PK_Estoque");
-
-                    b.HasIndex("JogoPlataformaId");
-
-                    b.ToTable("Estoque");
-                });
-
-            modelBuilder.Entity("Lojinha3.Domain.Model.Jogo", b =>
+            modelBuilder.Entity("Lojinha3.Domain.Model.Games.Jogo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,6 +198,60 @@ namespace Lojinha3.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Jogo");
+                });
+
+            modelBuilder.Entity("Lojinha3.Domain.Model.Games.Plataforma", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Fabricante")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Plataforma");
+
+                    b.ToTable("Plataforma");
+                });
+
+            modelBuilder.Entity("Lojinha3.Domain.Model.Inventory.Estoque", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("JogoPlataformaId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("QteJogoPorPlataforma")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Estoque");
+
+                    b.HasIndex("JogoPlataformaId");
+
+                    b.ToTable("Estoque");
                 });
 
             modelBuilder.Entity("Lojinha3.Domain.Model.Navigation.Menu", b =>
@@ -192,33 +284,6 @@ namespace Lojinha3.Data.Migrations
                         .HasName("PK_IdMenu");
 
                     b.ToTable("Menu");
-                });
-
-            modelBuilder.Entity("Lojinha3.Domain.Model.Plataforma", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Fabricante")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id")
-                        .HasName("PK_Plataforma");
-
-                    b.ToTable("Plataforma");
                 });
 
             modelBuilder.Entity("Lojinha3.Domain.Model.Relations.JogoDesenvolvedora", b =>
@@ -273,6 +338,27 @@ namespace Lojinha3.Data.Migrations
                     b.ToTable("JogoPlataforma");
                 });
 
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoCategoriaMenuUsuario", b =>
+                {
+                    b.HasOne("Lojinha3.Domain.Model.Access.CategoriaMenuAcesso", "CategoriaMenuAcesso")
+                        .WithMany("PermissaoCategoriaMenuUsuarios")
+                        .HasForeignKey("CategoriaMenuAcessoId")
+                        .HasConstraintName("FK_CategoriaMenuAcesso_PermissaoCategoria")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Lojinha3.Domain.Model.Access.Usuario", "Usuario")
+                        .WithMany("PermissaoCategoriaMenuUsuario")
+                        .HasForeignKey("UsuarioId")
+                        .HasConstraintName("FK_Usuario_PermissaoCategoria")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CategoriaMenuAcesso");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoMenuUsuario", b =>
                 {
                     b.HasOne("Lojinha3.Domain.Model.Navigation.Menu", "Menu")
@@ -294,7 +380,18 @@ namespace Lojinha3.Data.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Estoque", b =>
+            modelBuilder.Entity("Lojinha3.Domain.Model.Games.Jogo", b =>
+                {
+                    b.HasOne("Lojinha3.Domain.Model.Games.Desenvolvedora", "Desenvolvedora")
+                        .WithOne("Jogo")
+                        .HasForeignKey("Lojinha3.Domain.Model.Games.Jogo", "DesenvolvedoraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Desenvolvedora");
+                });
+
+            modelBuilder.Entity("Lojinha3.Domain.Model.Inventory.Estoque", b =>
                 {
                     b.HasOne("Lojinha3.Domain.Model.Relations.JogoPlataforma", "JogoPlataforma")
                         .WithMany("Estoque")
@@ -306,27 +403,16 @@ namespace Lojinha3.Data.Migrations
                     b.Navigation("JogoPlataforma");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Jogo", b =>
-                {
-                    b.HasOne("Lojinha3.Domain.Model.Desenvolvedora", "Desenvolvedora")
-                        .WithOne("Jogo")
-                        .HasForeignKey("Lojinha3.Domain.Model.Jogo", "DesenvolvedoraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Desenvolvedora");
-                });
-
             modelBuilder.Entity("Lojinha3.Domain.Model.Relations.JogoDesenvolvedora", b =>
                 {
-                    b.HasOne("Lojinha3.Domain.Model.Desenvolvedora", "Desenvolvedora")
+                    b.HasOne("Lojinha3.Domain.Model.Games.Desenvolvedora", "Desenvolvedora")
                         .WithMany("JogoDesenvolvedoras")
                         .HasForeignKey("DesenvolvedoraId")
                         .HasConstraintName("FK_Desenvolvedora")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Lojinha3.Domain.Model.Jogo", "Jogo")
+                    b.HasOne("Lojinha3.Domain.Model.Games.Jogo", "Jogo")
                         .WithMany("JogoDesenvolvedoras")
                         .HasForeignKey("JogoId")
                         .HasConstraintName("FK_Jogo")
@@ -340,14 +426,14 @@ namespace Lojinha3.Data.Migrations
 
             modelBuilder.Entity("Lojinha3.Domain.Model.Relations.JogoPlataforma", b =>
                 {
-                    b.HasOne("Lojinha3.Domain.Model.Jogo", "Jogo")
+                    b.HasOne("Lojinha3.Domain.Model.Games.Jogo", "Jogo")
                         .WithMany("JogosPlataformas")
                         .HasForeignKey("JogoId")
                         .HasConstraintName("FK_Jogo_JogoPlataformas")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Lojinha3.Domain.Model.Plataforma", "Plataforma")
+                    b.HasOne("Lojinha3.Domain.Model.Games.Plataforma", "Plataforma")
                         .WithMany("JogosPlataformas")
                         .HasForeignKey("PlataformaId")
                         .HasConstraintName("FK_Jogo_Plataformas_Jogo")
@@ -359,33 +445,40 @@ namespace Lojinha3.Data.Migrations
                     b.Navigation("Plataforma");
                 });
 
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.CategoriaMenuAcesso", b =>
+                {
+                    b.Navigation("PermissaoCategoriaMenuUsuarios");
+                });
+
             modelBuilder.Entity("Lojinha3.Domain.Model.Access.Usuario", b =>
                 {
+                    b.Navigation("PermissaoCategoriaMenuUsuario");
+
                     b.Navigation("PermissaoUsuarios");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Desenvolvedora", b =>
+            modelBuilder.Entity("Lojinha3.Domain.Model.Games.Desenvolvedora", b =>
                 {
                     b.Navigation("Jogo");
 
                     b.Navigation("JogoDesenvolvedoras");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Jogo", b =>
+            modelBuilder.Entity("Lojinha3.Domain.Model.Games.Jogo", b =>
                 {
                     b.Navigation("JogoDesenvolvedoras");
 
                     b.Navigation("JogosPlataformas");
                 });
 
+            modelBuilder.Entity("Lojinha3.Domain.Model.Games.Plataforma", b =>
+                {
+                    b.Navigation("JogosPlataformas");
+                });
+
             modelBuilder.Entity("Lojinha3.Domain.Model.Navigation.Menu", b =>
                 {
                     b.Navigation("PermissaoUsuarios");
-                });
-
-            modelBuilder.Entity("Lojinha3.Domain.Model.Plataforma", b =>
-                {
-                    b.Navigation("JogosPlataformas");
                 });
 
             modelBuilder.Entity("Lojinha3.Domain.Model.Relations.JogoPlataforma", b =>

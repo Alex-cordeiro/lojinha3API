@@ -1,4 +1,4 @@
-﻿using Lojinha3.Domain.Model;
+﻿using Lojinha3.Domain.Model.Games;
 using System.Collections.Generic;
 
 namespace Business.Interfaces

@@ -11,6 +11,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lojinha3.Domain\Lojinha3.Domain.csproj" />
+    <ProjectReference Include="..\Lojinha3.Helpers\Lojinha3.Helpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\Implementations\" />
   </ItemGroup>
 
 </Project>
