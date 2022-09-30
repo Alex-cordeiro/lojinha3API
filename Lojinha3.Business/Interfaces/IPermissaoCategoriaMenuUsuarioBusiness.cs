@@ -1,4 +1,5 @@
 ﻿using Lojinha3.Domain.Model.Access;
+using Lojinha3.Domain.Model.Access.Relations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Lojinha3.Business.Interfaces
 {
-    public interface IPermissaoCategoriaMenuUsuarioBusiness
+    public interface IPermissaoUsuarioBusiness
     {
-        public PermissaoCategoriaMenuUsuario Create(PermissaoCategoriaMenuUsuario permissaoCategoriaMenuUsuario);
-        public PermissaoCategoriaMenuUsuario FindByID(long id);
-        List<PermissaoCategoriaMenuUsuario> FindAll();
-        PermissaoCategoriaMenuUsuario Update(PermissaoCategoriaMenuUsuario permissaoCategoriaMenuUsuario);
+        public PermissaoUsuario Create(PermissaoUsuario permissaoCategoriaMenuUsuario);
+        public PermissaoUsuario FindByID(long id);
+        List<PermissaoUsuario> FindAll();
+        PermissaoUsuario Update(PermissaoUsuario permissaoCategoriaMenuUsuario);
         bool Delete(int id);
     }
 }

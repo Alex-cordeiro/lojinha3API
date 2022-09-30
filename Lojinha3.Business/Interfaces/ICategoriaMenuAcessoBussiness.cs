@@ -9,10 +9,10 @@ namespace Lojinha3.Business.Interfaces
 {
     public interface ICategoriaMenuAcessoBussiness
     {
-        public CategoriaMenuAcesso Create(CategoriaMenuAcesso categoriaMenuAcesso);
-        public CategoriaMenuAcesso FindByID(long id);
-        List<CategoriaMenuAcesso> FindAll();
-        CategoriaMenuAcesso Update(CategoriaMenuAcesso categoriaMenuAcesso);
+        public CategoriaAcesso Create(CategoriaAcesso categoriaMenuAcesso);
+        public CategoriaAcesso FindByID(long id);
+        List<CategoriaAcesso> FindAll();
+        CategoriaAcesso Update(CategoriaAcesso categoriaMenuAcesso);
         bool Delete(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace Lojinha3.Domain.Model.Dtos
+﻿
+namespace Lojinha3.Domain.Model.Dtos
 {
     public class CategoriaMenuAcessoDto
     {

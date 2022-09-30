@@ -90,7 +90,7 @@ namespace Lojinha3API
             services.AddTransient<ILoginBusiness, LoginBusinessImplementation>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IUsuarioBusiness, UsuarioBusinessImplementation>();
-            services.AddTransient<IPermissaoCategoriaMenuUsuarioBusiness, PermissaoCategoriaMenuUsuarioBusinessImplementation>();
+            services.AddTransient<IPermissaoUsuarioBusiness, PermissaoUsuarioBusinessImplementation>();
 
 
             //injeção do repositório genérico

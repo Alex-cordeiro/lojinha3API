@@ -11,17 +11,17 @@ namespace Lojinha3.Business.Implementations
 {
     public class CategoriaMenuAcessoBusinessImplementation : ICategoriaMenuAcessoBussiness
     {
-        private readonly IRepository<CategoriaMenuAcesso> _repository;
+        private readonly IRepository<CategoriaAcesso> _repository;
 
         private readonly LojinhaContext _lojinhaContext;
 
-        public CategoriaMenuAcessoBusinessImplementation(IRepository<CategoriaMenuAcesso> repository, LojinhaContext context)
+        public CategoriaMenuAcessoBusinessImplementation(IRepository<CategoriaAcesso> repository, LojinhaContext context)
         {
             _repository = repository;
             _lojinhaContext = context;
         }
 
-        public CategoriaMenuAcesso Create(CategoriaMenuAcesso categoriaMenuAcesso)
+        public CategoriaAcesso Create(CategoriaAcesso categoriaMenuAcesso)
         {
             return _repository.Create(categoriaMenuAcesso);
         }
@@ -31,17 +31,17 @@ namespace Lojinha3.Business.Implementations
             return _repository.Delete(id);
         }
 
-        public List<CategoriaMenuAcesso> FindAll()
+        public List<CategoriaAcesso> FindAll()
         {
             return _repository.FindAll();
         }
 
-        public CategoriaMenuAcesso FindByID(long id)
+        public CategoriaAcesso FindByID(long id)
         {
             return _repository.FindByID(id);
         }
 
-        public CategoriaMenuAcesso Update(CategoriaMenuAcesso categoriaMenuAcesso)
+        public CategoriaAcesso Update(CategoriaAcesso categoriaMenuAcesso)
         {
             return _repository.Update(categoriaMenuAcesso);
         }

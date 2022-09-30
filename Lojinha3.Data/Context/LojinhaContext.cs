@@ -1,6 +1,8 @@
 ﻿using Lojinha3.Domain.Model.Access;
+using Lojinha3.Domain.Model.Access.Relations;
 using Lojinha3.Domain.Model.Games;
 using Lojinha3.Domain.Model.Inventory;
+using Lojinha3.Domain.Model.Navigation;
 using Lojinha3.Domain.Model.Relations;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,12 +24,14 @@ namespace Lojinha3API.Context
 
 
         //Access
-        public DbSet<CategoriaMenuAcesso> CategoriaMenuAcessos { get; set; }
-        public DbSet<PermissaoCategoriaMenuUsuario> PermissaoCategoriaMenuUsuarios { get; set; }
-        public DbSet<PermissaoMenuUsuario> PermissaoMenuUsuarios { get; set; }
+        public DbSet<CategoriaAcesso> CategoriaMenuAcessos { get; set; }
+        public DbSet<PermissaoUsuario> PermissaoUsuarios { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
 
+
+        //Navigation
+        public DbSet<Menu> Menus { get; set; }
         //Inventory
         public DbSet<Estoque> Estoques { get; set; }
 

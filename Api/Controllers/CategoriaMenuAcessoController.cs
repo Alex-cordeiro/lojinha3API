@@ -3,6 +3,7 @@ using Lojinha3.Business.Interfaces;
 using Lojinha3.Domain.Model.Access;
 using Lojinha3.Domain.Model.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,25 +28,18 @@ namespace Lojinha3API.Controllers
         public IActionResult RetornaCategoriaMenuAcessos()
         {
             var retornoCategorias = _categoriaMenuAcesso.FindAll();
-            var teste = _mapper.Map<CategoriaMenuAcessoDto>(retornoCategorias);
+            
+            if(retornoCategorias.Count > 0)
+                return Ok(_mapper.Map<List<CategoriaMenuAcessoDto>>(retornoCategorias));
+            return Ok("Não existem categorias cadastradas");
 
 
-            return Ok();
         }
-
-        //// GET: CategoriaMenuAcessoController/Details/5
-        //[HttpGet("RetornaCategoriasMenuAcessoUsuario")]
-        //public IActionResult RetornaCategoriaMenuAcessos(UsuarioDto usuarioDto)
-        //{
-        //    var usuarioParaRetorno = _mapper.Map<Usuario>(usuarioDto);
-
-        //    //return Ok(_categoriaMenuAcesso.FindbyUserPermission(usuarioParaRetorno);
-        //}
 
         [HttpPost("NovaCategoriaMenuAcesso")]
         public IActionResult NovaCategoriaMenuAcesso([FromBody] CategoriaMenuAcessoDto categoriaMenuAcesso)
         {
-            var novaCategoriaMenuAcesso = _mapper.Map<CategoriaMenuAcesso>(categoriaMenuAcesso);
+            var novaCategoriaMenuAcesso = _mapper.Map<CategoriaAcesso>(categoriaMenuAcesso);
             var desenvolvedoraCriada = _categoriaMenuAcesso.Create(novaCategoriaMenuAcesso);
 
             if (desenvolvedoraCriada != null)
@@ -56,7 +50,7 @@ namespace Lojinha3API.Controllers
         [HttpPut("AlterarCategoriaMenuAcesso")]
         public IActionResult AlterarCategoriaMenuAcesso([FromBody] CategoriaMenuAcessoDto desenvolvedora)
         {
-            var desenvolvedoraParaEdicao = _mapper.Map<CategoriaMenuAcesso>(desenvolvedora);
+            var desenvolvedoraParaEdicao = _mapper.Map<CategoriaAcesso>(desenvolvedora);
             var desenvolvedoraAlterada = _categoriaMenuAcesso.Update(desenvolvedoraParaEdicao);
 
             if (desenvolvedoraAlterada != null)

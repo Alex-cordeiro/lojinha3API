@@ -4,14 +4,16 @@ using Lojinha3API.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lojinha3.Data.Migrations
 {
     [DbContext(typeof(LojinhaContext))]
-    partial class LojinhaContextModelSnapshot : ModelSnapshot
+    [Migration("20220925152319_Alteracao_permissoes")]
+    partial class Alteracao_permissoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,36 +51,52 @@ namespace Lojinha3.Data.Migrations
                     b.ToTable("categoriaacesso");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Access.Relations.PermissaoUsuario", b =>
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoCategoriaMenuUsuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoriaAcessoId")
-                        .HasMaxLength(4)
+                    b.Property<int>("CategoriaMenuAcessoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id")
+                        .HasName("PK_PermissaoCategoriaMenuAcesso");
+
+                    b.HasIndex("CategoriaMenuAcessoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("PermissaoCategoriaMenuUsuario");
+                });
+
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoMenuUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("CategoriaAcessoId");
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("MenuId")
-                        .HasMaxLength(4)
-                        .HasColumnType("int")
-                        .HasColumnName("MenuId");
+                        .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
-                        .HasMaxLength(4)
-                        .HasColumnType("int")
-                        .HasColumnName("UsuarioId");
+                        .HasColumnType("int");
 
                     b.HasKey("Id")
-                        .HasName("PK_PermissaoUsuario");
-
-                    b.HasIndex("CategoriaAcessoId");
+                        .HasName("PK_IdPermissaoUsuario");
 
                     b.HasIndex("MenuId");
 
@@ -267,10 +285,15 @@ namespace Lojinha3.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<int?>("PermissaoMenuUsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id")
                         .HasName("PK_IdMenu");
 
                     b.HasIndex("CategoriaAcessoId");
+
+                    b.HasIndex("PermissaoMenuUsuarioId");
 
                     b.ToTable("Menu");
                 });
@@ -327,30 +350,42 @@ namespace Lojinha3.Data.Migrations
                     b.ToTable("JogoPlataforma");
                 });
 
-            modelBuilder.Entity("Lojinha3.Domain.Model.Access.Relations.PermissaoUsuario", b =>
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoCategoriaMenuUsuario", b =>
                 {
-                    b.HasOne("Lojinha3.Domain.Model.Access.CategoriaAcesso", "CategoriaAcesso")
-                        .WithMany("PermissaoUsuario")
-                        .HasForeignKey("CategoriaAcessoId")
-                        .HasConstraintName("FK_PermissaoUsuarios_CategoriaAcesso")
+                    b.HasOne("Lojinha3.Domain.Model.Access.CategoriaAcesso", "CategoriaMenuAcesso")
+                        .WithMany("PermissaoCategoriaMenuUsuarios")
+                        .HasForeignKey("CategoriaMenuAcessoId")
+                        .HasConstraintName("FK_CategoriaMenuAcesso_PermissaoCategoria")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Lojinha3.Domain.Model.Access.Usuario", "Usuario")
+                        .WithMany("PermissaoCategoriaMenuUsuario")
+                        .HasForeignKey("UsuarioId")
+                        .HasConstraintName("FK_Usuario_PermissaoCategoria")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CategoriaMenuAcesso");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoMenuUsuario", b =>
+                {
                     b.HasOne("Lojinha3.Domain.Model.Navigation.Menu", "Menu")
                         .WithMany("PermissaoUsuarios")
                         .HasForeignKey("MenuId")
-                        .HasConstraintName("FK_PermissaoUsuarios_Menu")
+                        .HasConstraintName("FK_Menu_Permissao")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Lojinha3.Domain.Model.Access.Usuario", "Usuario")
                         .WithMany("PermissaoUsuarios")
                         .HasForeignKey("UsuarioId")
-                        .HasConstraintName("FK_PermissaoUsuarios_Usuario")
+                        .HasConstraintName("FK_Usuario_Permissao")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("CategoriaAcesso");
 
                     b.Navigation("Menu");
 
@@ -385,6 +420,10 @@ namespace Lojinha3.Data.Migrations
                     b.HasOne("Lojinha3.Domain.Model.Access.CategoriaAcesso", null)
                         .WithMany("Menus")
                         .HasForeignKey("CategoriaAcessoId");
+
+                    b.HasOne("Lojinha3.Domain.Model.Access.PermissaoMenuUsuario", null)
+                        .WithMany("Menus")
+                        .HasForeignKey("PermissaoMenuUsuarioId");
                 });
 
             modelBuilder.Entity("Lojinha3.Domain.Model.Relations.JogoDesenvolvedora", b =>
@@ -433,11 +472,18 @@ namespace Lojinha3.Data.Migrations
                 {
                     b.Navigation("Menus");
 
-                    b.Navigation("PermissaoUsuario");
+                    b.Navigation("PermissaoCategoriaMenuUsuarios");
+                });
+
+            modelBuilder.Entity("Lojinha3.Domain.Model.Access.PermissaoMenuUsuario", b =>
+                {
+                    b.Navigation("Menus");
                 });
 
             modelBuilder.Entity("Lojinha3.Domain.Model.Access.Usuario", b =>
                 {
+                    b.Navigation("PermissaoCategoriaMenuUsuario");
+
                     b.Navigation("PermissaoUsuarios");
                 });
 

@@ -7,14 +7,14 @@ namespace Lojinha3API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PermissaoMenusController : ControllerBase
+    public class PermissaoUsuarioController : ControllerBase
     {
-        private readonly PermissaoCategoriaMenuUsuarioBusinessImplementation _permissaoAcessoBusiness;
+        private readonly PermissaoUsuarioBusinessImplementation _permissaoAcessoBusiness;
         private readonly IMapper mapper;
 
-        public PermissaoMenusController(IPermissaoCategoriaMenuUsuarioBusiness permissaoAcessoBusiness, IMapper mapper)
+        public PermissaoUsuarioController(IPermissaoUsuarioBusiness permissaoAcessoBusiness, IMapper mapper)
         {
-            _permissaoAcessoBusiness = (PermissaoCategoriaMenuUsuarioBusinessImplementation)permissaoAcessoBusiness;
+            _permissaoAcessoBusiness = (PermissaoUsuarioBusinessImplementation)permissaoAcessoBusiness;
             this.mapper = mapper;
         }
 

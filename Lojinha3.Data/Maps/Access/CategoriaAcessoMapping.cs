@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Lojinha3.Data.Maps.Access
 {
-    public class CategoriaMenuAcessoMapping : IEntityTypeConfiguration<CategoriaMenuAcesso>
+    public class CategoriaAcessoMapping : IEntityTypeConfiguration<CategoriaAcesso>
     {
-        public void Configure(EntityTypeBuilder<CategoriaMenuAcesso> builder)
+        public void Configure(EntityTypeBuilder<CategoriaAcesso> builder)
         {
-            builder.ToTable("CategoriaMenuAcesso");
+            builder.ToTable("categoriaacesso");
             builder.Property(x => x.Id)
                    .UseMySqlIdentityColumn();
 
@@ -31,8 +31,6 @@ namespace Lojinha3.Data.Maps.Access
 
             builder.Property(x => x.CreatedAt)
                     .ValueGeneratedOnAdd();
-
- 
         }
     }
 }

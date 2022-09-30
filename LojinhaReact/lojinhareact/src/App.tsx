@@ -9,6 +9,7 @@ import { RouteJogos } from './Pages/Jogo/Routes'
 import { Menu } from './Pages/Menu'
 import { Unauthorized } from './Pages/Unauthorized'
 import { theme } from './theme/theme'
+import { CustomSideBar } from './components/sidebar'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<CustomSideBar/>}/>
           <Route path='/Menu' element={<PrivateRoute><Menu /></PrivateRoute>} />
           <Route path='/jogo/*' element={<PrivateRoute><RouteJogos /></PrivateRoute>} />
           <Route path='/Unauthorized' element={<Unauthorized />} />

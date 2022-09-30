@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lojinha3.Domain.Model.Access.Relations;
+using System;
 using System.Collections.Generic;
 
 namespace Lojinha3.Domain.Model.Access
@@ -10,8 +11,7 @@ namespace Lojinha3.Domain.Model.Access
         public string Senha { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
-        public List<PermissaoMenuUsuario> PermissaoUsuarios { get; set; }
-        public List<PermissaoCategoriaMenuUsuario> PermissaoCategoriaMenuUsuario { get; set; }
+        public List<PermissaoUsuario> PermissaoUsuarios { get; set; }
 
     }
 }
