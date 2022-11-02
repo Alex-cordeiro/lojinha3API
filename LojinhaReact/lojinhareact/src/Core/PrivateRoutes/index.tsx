@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { Tela } from "../../components/tela";
+import { Menu } from "../../Pages/Menu";
 
 interface Props {
   children: any;
@@ -12,5 +13,5 @@ export const PrivateRoute = (props: Props) => {
     return <Navigate to="/Unauthorized" />;
   }
 
-  return <Tela>{props.children}</Tela>;
+  return <Menu>{props.children}</Menu>;
 };

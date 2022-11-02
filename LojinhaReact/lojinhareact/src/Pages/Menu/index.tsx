@@ -1,19 +1,17 @@
 import { CustomNavbar } from "../../components/navbar";
-import {useEffect} from "react";
-import api from "../../Core/api/api";
-import { useCategoria } from "./hooks/useCategoria";
+import { useEffect } from "react";
+import { usePermissaoMenu } from "./hooks/usePermissaoMenu";
 import { ButaoRosa, DivAmarela } from "./style";
+import { Wrapper } from "../../components/sidebar/style";
+import { Sidebar } from "../../components/sidebar";
 
-export function Menu(){
-    const {categorias} = useCategoria();
-    return (
-        <DivAmarela>
-            <ButaoRosa>Me clicke safadu!</ButaoRosa>
-            {categorias ? categorias.map((item) => {
-                return <h2 key={item.id}>{item.nome}</h2> 
-            }) : ""}
-        </DivAmarela>
-
-
-    )
+export function Menu({ children }: any) {
+  return (
+    <>
+      <Wrapper>
+        <Sidebar />
+        <div style={{ backgroundColor: "black" }}>{children}</div>
+      </Wrapper>
+    </>
+  );
 }

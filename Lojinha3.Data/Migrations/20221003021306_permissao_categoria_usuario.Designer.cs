@@ -4,14 +4,16 @@ using Lojinha3API.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lojinha3.Data.Migrations
 {
     [DbContext(typeof(LojinhaContext))]
-    partial class LojinhaContextModelSnapshot : ModelSnapshot
+    [Migration("20221003021306_permissao_categoria_usuario")]
+    partial class permissao_categoria_usuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

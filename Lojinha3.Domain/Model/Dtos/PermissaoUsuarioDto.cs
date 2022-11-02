@@ -6,7 +6,6 @@ namespace Lojinha3.Domain.Model.Dtos
     public class PermissaoUsuarioDto
     {
         public int Id { get; set; }
-        public CategoriaAcesso CategoriaAcesso { get; set; }
         public Menu menu { get; set; }
 
     }

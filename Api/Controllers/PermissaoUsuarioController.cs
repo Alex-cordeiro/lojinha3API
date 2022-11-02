@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Lojinha3.Business.Implementations;
 using Lojinha3.Business.Interfaces;
+using Lojinha3.Domain.Model.Access.Relations;
+using Lojinha3.Domain.Model.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Lojinha3API.Controllers
 {
@@ -9,13 +12,13 @@ namespace Lojinha3API.Controllers
     [ApiController]
     public class PermissaoUsuarioController : ControllerBase
     {
-        private readonly PermissaoUsuarioBusinessImplementation _permissaoAcessoBusiness;
-        private readonly IMapper mapper;
+        private readonly PermissaoMenuUsuarioBusinessImplementation _permissaoAcessoBusiness;
+        private readonly IMapper _mapper;
 
-        public PermissaoUsuarioController(IPermissaoUsuarioBusiness permissaoAcessoBusiness, IMapper mapper)
+        public PermissaoUsuarioController(IPermissaoMenuUsuarioBusiness permissaoAcessoBusiness, IMapper mapper)
         {
-            _permissaoAcessoBusiness = (PermissaoUsuarioBusinessImplementation)permissaoAcessoBusiness;
-            this.mapper = mapper;
+            _permissaoAcessoBusiness = (PermissaoMenuUsuarioBusinessImplementation)permissaoAcessoBusiness;
+            _mapper = mapper;
         }
 
         // GET: api/<PermissaoMenusController>
@@ -24,7 +27,8 @@ namespace Lojinha3API.Controllers
         {
             var permissoesRetornadas = _permissaoAcessoBusiness.FindByUserPermission(id);
             if (permissoesRetornadas.Count > 0)
-                return Ok(permissoesRetornadas);
+                return Ok(_mapper.Map<List<PermissaoUsuarioDto>>(permissoesRetornadas));
+
             return NotFound("Não foram encontradas permissões atribuidas à este usuario!");
         }
 

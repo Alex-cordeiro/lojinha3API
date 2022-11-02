@@ -25,8 +25,9 @@ namespace Lojinha3API.Context
 
         //Access
         public DbSet<CategoriaAcesso> CategoriaMenuAcessos { get; set; }
-        public DbSet<PermissaoUsuario> PermissaoUsuarios { get; set; }
+        public DbSet<PermissaoMenuUsuario> PermissaoMenuUsuarios { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<CategoriaMenuUsuario> CategoriaMenuUsuarios { get; set; }
 
 
 

@@ -13,17 +13,17 @@ namespace Lojinha3API.AutomapperConfig
             CreateMap<Menu, MenuDto>()
                 .ForMember(dto => dto.Id, d => d.MapFrom(x => x.Id));
 
-            CreateMap<PermissaoUsuario, PermissaoUsuarioDto>()
-                .ForMember(pud => pud.Id, p => p.MapFrom(x => x.Id))
-                .ForMember(pud => pud.CategoriaAcesso, d => d.MapFrom(x => x.CategoriaAcesso)).ReverseMap();
+            CreateMap<PermissaoMenuUsuario, PermissaoUsuarioDto>()
+                .ForMember(pud => pud.Id, p => p.MapFrom(x => x.Id)).ReverseMap();
+                
 
-            CreateMap<PermissaoUsuarioDto, PermissaoUsuario>()
-                .ForMember(p => p.CategoriaAcessoId, pud => pud.Ignore())
+            CreateMap<PermissaoUsuarioDto, PermissaoMenuUsuario>()
                 .ForMember(p => p.MenuId, pud => pud.Ignore())
                 .ForMember(p => p.Usuario, pud => pud.Ignore()).ReverseMap();
 
             CreateMap<CategoriaMenuAcessoDto, CategoriaAcesso>()
-                .ForMember(d => d.PermissaoUsuario, dto => dto.Ignore()).ReverseMap();
+                .ForMember(d => d.CreatedAt, dto => dto.Ignore()).ReverseMap();
+            
 
             CreateMap<Usuario, UsuarioDto>()
                 .ForMember(dto => dto.Id, d => d.MapFrom(x => x.Id)).ReverseMap();

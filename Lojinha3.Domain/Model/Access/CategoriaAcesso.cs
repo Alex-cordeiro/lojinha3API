@@ -9,7 +9,7 @@ namespace Lojinha3.Domain.Model.Access
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Icone { get; set; }
-        public List<PermissaoUsuario> PermissaoUsuario { get; set; }
-        public List<Menu> Menus { get; set; }
+        public List<CategoriaMenuUsuario> CategoriaMenuUsuario { get; set; }
+        public List<Menu> Menu { get; set; }
     }
 }
